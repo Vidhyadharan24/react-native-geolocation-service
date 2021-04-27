@@ -100,11 +100,10 @@ class RNFusedLocation: RCTEventEmitter {
       }
     }
 
-    let locManager = CLLocationManager()
-    locManager.delegate = self
-    locManager.desiredAccuracy = getAccuracy(options)
-    locManager.distanceFilter = distanceFilter
-    locManager.startUpdatingLocation()
+    locationManager.delegate = self
+    locationManager.desiredAccuracy = getAccuracy(options)
+    locationManager.distanceFilter = distanceFilter
+    locationManager.startUpdatingLocation()
 
     self.successCallback = successCallback
     self.errorCallback = errorCallback
@@ -116,7 +115,7 @@ class RNFusedLocation: RCTEventEmitter {
         selector: #selector(timerFired),
         userInfo: [
           "errorCallback": errorCallback,
-          "manager": locManager
+          "manager": locationManager
         ],
         repeats: false
       )
